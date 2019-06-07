@@ -13,7 +13,15 @@
 						{
 							// create the button and bind it to the event onAdd
 							tag: 'button',
-							content: 'Update Topology From Server',
+							content: 'Update Topology From Server ++',
+							events: {
+								'click': '{#updateTopologyp}'
+							}
+						},
+						{
+							// create the button and bind it to the event onAdd
+							tag: 'button',
+							content: 'Update Topology From Server --',
 							events: {
 								'click': '{#updateTopology}'
 							}
@@ -24,7 +32,7 @@
 		},
 		methods: {
 			// execute this when hit 'add random node & link'
-			'updateTopology': function () {
+			'updateTopologyp': function () {
 				var topo = this.topology();
 				// use ajax to fetch an updated topology object
 				$.ajax({
