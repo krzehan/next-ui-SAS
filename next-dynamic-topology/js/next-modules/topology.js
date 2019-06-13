@@ -29,7 +29,7 @@
 							 https://developer.cisco.com/media/neXt-site/example.html#Basic/icons
 							 */
 							'iconType': 'router',
-							'color': '#0how00'
+							'color': '#0how11'
 						},
 						'linkConfig': {
 							'linkType': 'curve' // also: parallel

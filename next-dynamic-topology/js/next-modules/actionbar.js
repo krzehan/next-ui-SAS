@@ -23,7 +23,7 @@
 							tag: 'button',
 							content: 'Update Topology From Server --',
 							events: {
-								'click': '{#updateTopology}'
+								'click': '{#updateTopologym}'
 							}
 						}
 					]
@@ -37,7 +37,7 @@
 				// use ajax to fetch an updated topology object
 				$.ajax({
 					type: 'GET',
-					url: 'http://localhost:5555/pwaearvasdvluscadca11plus',
+					url: 'http://localhost:5555/plusplus',
 					dataType: 'json',
 					success: function (data) {
 						// go through fetched nodes' array
@@ -62,8 +62,40 @@
 				});
 
 
+			},
+
+			'updateTopologym': function () {
+				var topo = this.topology();
+				// use ajax to fetch an updated topology object
+				$.ajax({
+					type: 'GET',
+					url: 'http://localhost:5555/minusminus',
+					dataType: 'json',
+					success: function (data) {
+						// go through fetched nodes' array
+						nx.each(data.nodes, function (nodeData) {
+							var node = topo.getNode(nodeData.id);
+							// if it's an array it means the node exists and we don't need to add it
+							if(typeof(node) != 'Array'){
+								topo.addNode(nodeData);
+							}
+						});
+						// go through fetched links' array
+						nx.each(data.links,function(linkData){
+							var link = topo.getLink(linkData.id);
+							// if it's an array it means the link exists and we don't need to add it
+							if(typeof(link) != 'Array'){
+								topo.addLink(linkData);
+							}
+						});
+						// adjust topology's size
+						topo.fit();
+					}
+				});
+
 
 			},
+
 			// assign topology instance (by ref) to the actionbar instance
 			'assignTopology': function (topo) {
 				this.topology(topo);

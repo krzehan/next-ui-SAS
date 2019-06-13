@@ -52,7 +52,18 @@ var server = http.createServer(
 										target: newNodeId
 									}
 								)
-							}})
+							}
+
+
+							if(request.url === '/minusminus') {
+								var newNodeId = topologyData.nodes.length;
+								topologyData.nodes.splice()
+
+								topologyData.links.splice()
+							}
+
+
+					})
 
 				/* else {
 					response.statusCode = 404;
