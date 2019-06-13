@@ -37,7 +37,7 @@
 				// use ajax to fetch an updated topology object
 				$.ajax({
 					type: 'GET',
-					url: 'http://localhost:5555/',
+					url: 'http://localhost:5555/pwaearvasdvluscadca11plus',
 					dataType: 'json',
 					success: function (data) {
 						// go through fetched nodes' array

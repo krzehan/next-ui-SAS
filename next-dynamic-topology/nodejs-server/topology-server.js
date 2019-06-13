@@ -27,18 +27,67 @@ var topologyData = {
 var http = require('http');
 
 var server = http.createServer(
-			function (req, res) {
-												res.writeHead(200,{
-												'Access-Control-Allow-Origin': '*'
-														}
-													);
-												res.end(JSON.stringify(topologyData));
-												}
-											);
+			function (request, response) {
+
+				/*if (request.method === 'GET' && requset.url === '/plusplus') {
+					const { headers, method, url } = request;*/
+					server.on('request',
+						function (stream) {
+							if(request.url === '/plusplus') {
+								var newNodeId = topologyData.nodes.length;
+								topologyData.nodes.push(
+									{
+										id: newNodeId,
+										x: Math.floor(Math.random() * 800 + 10),
+										y: Math.floor(Math.random() * 400 + 10),
+										name: 'generated-node-' + topologyData.nodes.length
+									}
+								)
+
+								topologyData.links.push(
+									{
+										id: topologyData.links.length,
+										// random node's id except the new one's
+										source: Math.floor(Math.random() * (newNodeId - 1)),
+										target: newNodeId
+									}
+								)
+							}})
+
+				/* else {
+					response.statusCode = 404;
+					response.end();
+				}*/
+
+				/*let headers, method, url;
+				({headers, method, url} = req);
+				let body = [];
+				request.on('error', (err) => {
+					console.error(err);
+				}).on('data', (chunk) => {
+					body.push(chunk);
+				}).on('end', () => {
+					body = Buffer.concat(body).toString();
+					// At this point, we have the headers, method, url and body, and can now
+					// do whatever we need to in order to respond to this request.
+				});*/
+
+				response.writeHead(200,{
+						'Access-Control-Allow-Origin': '*'
+						}
+					);
+				response.end(JSON.stringify(topologyData));
+											}
+
+					);
+
+
+
 // listener that make changes in topology as someone's connected
-server.on('request',
+/*server.on( 'request',
 
 	function (stream) {
+				if(request.url === "/plusplus"){
 				var newNodeId = topologyData.nodes.length;
 				topologyData.nodes.push(
 				{
@@ -57,8 +106,10 @@ server.on('request',
 						target: newNodeId
 				}
 				)
-			}
-	);
+			}}
+	);*/
 
-server.listen(5555);
+
+
+server.listen(5555)
 
